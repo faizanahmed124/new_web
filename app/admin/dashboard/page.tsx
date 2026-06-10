@@ -39,7 +39,7 @@ export default function AdminDashboard() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    if (!isLoggedIn) { router.push("/admin/login"); return; }
+    if (!isLoggedIn) { router.push("/admin/signin"); return; }
     fetch("/api/products")
       .then((r) => r.json())
       .then((d) => setProducts(d))
@@ -109,7 +109,7 @@ export default function AdminDashboard() {
           <a href="/" className="text-[11px] tracking-wide text-stone-500 hover:text-stone-900 transition-colors">
             ← View Site
           </a>
-          <button onClick={() => { logout(); router.push("/admin/login"); }}
+          <button onClick={() => { logout(); router.push("/admin/signin"); }}
             className="flex items-center gap-1.5 text-[11px] tracking-wide text-stone-500 hover:text-red-600 transition-colors">
             <LogOut className="w-3.5 h-3.5" /> Logout
           </button>

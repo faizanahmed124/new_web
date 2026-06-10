@@ -106,7 +106,7 @@ export default function Home() {
 
 {/* // Category Cards section ke baad: */}
 <SplitBanner
-  leftImage="https://www.cliveshoes.com/cdn/shop/files/L04041906NVY.jpg?v=1773831445&width=1080"
+  leftImage="/images/forty2.png"
   rightImage="https://i.pinimg.com/736x/f6/9d/99/f69d99d0f088d04ab566326f5a7ac371.jpg"
   leftLabel="Shop Women"
   rightLabel="Shop Men"

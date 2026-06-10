@@ -75,34 +75,29 @@ export default function Header() {
       </div>
 
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-white/98 backdrop-blur-xl border-b border-stone-200 shadow-md"
-            : "bg-white border-b border-stone-200"
-        }`}
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+  isScrolled
+    ? "backdrop-blur-xl border-b border-stone-300 shadow-md"
+    : "border-b border-stone-300"
+}`}
+style={{ backgroundColor: "#F0EDE6" }}
         onMouseLeave={() => setActiveMega(null)}
       >
         <div className="container mx-auto px-4 sm:px-6 py-3">
           <div className="flex items-center justify-between gap-4">
 
             {/* Logo */}
-            <Link
-              className="flex flex-col leading-none group shrink-0"
-              href="/"
-              aria-label="Forty Shoes Home"
-            >
-              <span
-                className="text-2xl font-black tracking-[0.12em] text-stone-900 group-hover:text-stone-600 transition-colors"
-                style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
-              >
-                FORTY
-              </span>
-              <span
-                className="text-[9px] tracking-[0.45em] text-stone-400 uppercase font-medium -mt-0.5"
-              >
-                SHOES
-              </span>
-            </Link>
+         <Link
+  className="shrink-0 group"
+  href="/"
+  aria-label="Forty Shoes Home"
+>
+  <img
+    src="/images/logo.jpeg"
+    alt="Forty Shoes"
+    className="h-10 w-auto object-contain group-hover:opacity-80 transition-opacity duration-200"
+  />
+</Link>
 
             {/* Desktop Nav */}
             <nav
@@ -180,12 +175,12 @@ export default function Header() {
               </Link>
 
               <div className="hidden sm:flex items-center gap-2">
-                <Link href="/signin">
+                <Link href="/customer/signin">
                   <Button variant="ghost" size="sm" className="text-xs font-semibold tracking-wide text-stone-700 hover:text-stone-900">
                     Sign In
                   </Button>
                 </Link>
-                <Link href="/signup">
+                <Link href="/customer/signin">
                   <Button size="sm" className="text-xs font-semibold tracking-wide bg-stone-900 hover:bg-stone-700 text-white rounded-full px-4">
                     Sign Up
                   </Button>
@@ -280,10 +275,10 @@ export default function Header() {
 
               <div className="flex flex-col gap-2 pt-4 sm:hidden">
                 <Button variant="outline" className="w-full text-sm border-stone-300" asChild>
-                  <Link href="/signin" onClick={closeMobileMenu}>Sign In</Link>
+                  <Link href="/admin/signin" onClick={closeMobileMenu}>Sign In</Link>
                 </Button>
                 <Button className="w-full text-sm bg-stone-900 hover:bg-stone-700 text-white" asChild>
-                  <Link href="/signup" onClick={closeMobileMenu}>Sign Up</Link>
+                  <Link href="/admin/signup" onClick={closeMobileMenu}>Sign Up</Link>
                 </Button>
               </div>
             </nav>

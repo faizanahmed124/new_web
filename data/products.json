@@ -7,8 +7,8 @@
     "category": "Men",
     "badge": "NEW",
     "slug": "airflex-runner",
-    "image": "https://images.unsplash.com/photo-1579338559194-a162d19bf842?q=80&w=687&auto=format&fit=crop",
-    "description": "Lightweight running sneakers designed for speed and comfort. Breathable mesh and durable sole."
+    "image": "/images/forty1.png",
+     "description": "Lightweight running sneakers designed for speed and comfort. Breathable mesh and durable sole."
   },
   {
     "id": 2,
@@ -18,7 +18,7 @@
     "category": "Men",
     "badge": null,
     "slug": "urban-street-pro",
-    "image": "https://images.unsplash.com/photo-1608667508764-33cf0726b13a?q=80&w=880&auto=format&fit=crop",
+    "image": "/images/forty2.png",
     "description": "Minimalist sneakers for everyday wear. Premium leather with a modern urban look."
   },
   {
@@ -29,7 +29,7 @@
     "category": "Men",
     "badge": null,
     "slug": "classic-court-90s",
-    "image": "https://images.unsplash.com/photo-1465453869711-7e174808ace9?q=80&w=1176&auto=format&fit=crop",
+    "image": "/images/forty3.png",
     "description": "Retro-inspired sneakers with a tennis court vibe. Perfect balance between comfort and style."
   },
   {
@@ -40,7 +40,7 @@
     "category": "Men",
     "badge": "HOT",
     "slug": "volt-edge",
-    "image": "https://images.unsplash.com/photo-1512374382149-233c42b6a83b?q=80&w=735&auto=format&fit=crop",
+    "image": "/images/forty4.png",
     "description": "Performance sneakers with bold details. Responsive cushioning for all-day energy."
   },
   {

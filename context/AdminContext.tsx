@@ -22,7 +22,6 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const login = (username: string, password: string) => {
-    // Simple credentials — change these
     if (username === "admin" && password === "forty2025") {
       setIsLoggedIn(true);
       sessionStorage.setItem("admin_logged_in", "true");
@@ -34,6 +33,9 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const logout = () => {
     setIsLoggedIn(false);
     sessionStorage.removeItem("admin_logged_in");
+    if (typeof window !== "undefined") {
+      window.location.href = "/admin/signin";
+    }
   };
 
   return (
