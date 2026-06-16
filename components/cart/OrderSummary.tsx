@@ -11,10 +11,7 @@ import Link from "next/link";
 export default function OrderSummary() {
   const { cart } = useCart();
 
-  const subtotal = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const shipping = subtotal > 50 ? 0 : 9.99;
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
@@ -29,37 +26,27 @@ export default function OrderSummary() {
       <CardContent className="space-y-4">
         <div className="space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-muted-foreground">
-              Subtotal ({itemCount} items)
-            </span>
+            <span className="text-muted-foreground">Subtotal ({itemCount} items)</span>
             <span className="font-medium">${subtotal.toFixed(2)}</span>
           </div>
-
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">Shipping</span>
             <span className="font-medium">
               {shipping === 0 ? (
-                <Badge variant="secondary" className="text-xs">
-                  Free
-                </Badge>
+                <Badge variant="secondary" className="text-xs">Free</Badge>
               ) : (
                 `$${shipping.toFixed(2)}`
               )}
             </span>
           </div>
-
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">Tax</span>
             <span className="font-medium">${tax.toFixed(2)}</span>
           </div>
-
           <Separator />
-
           <div className="flex justify-between">
             <span className="text-lg font-semibold">Total</span>
-            <span className="text-lg font-bold text-primary">
-              ${total.toFixed(2)}
-            </span>
+            <span className="text-lg font-bold text-primary">${total.toFixed(2)}</span>
           </div>
         </div>
 
@@ -77,9 +64,10 @@ export default function OrderSummary() {
           </div>
         )}
 
+        {/* ← Checkout button → /checkout page */}
         <Button
           size="lg"
-          className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+          className="w-full bg-stone-900 text-white hover:bg-stone-700"
           asChild
         >
           <Link href="/checkout" className="flex items-center gap-2">

@@ -1,20 +1,19 @@
 "use client";
 
-import products from "@/data/products.json";
 import ProductCard from "./ProductCard";
 import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Product {
   id: number;
   name: string;
   price: number;
-  originalPrice?: number;
+  originalPrice?: number | null;
   image: string;
   category?: string;
-  badge?: string;
+  badge?: string | null;
   slug: string;
   description?: string;
 }
@@ -51,7 +50,7 @@ function EditorialCard({ product }: { product: Product }) {
             Shop
           </Link>
         </div>
-        <button onClick={() => addToCart({ ...product, quantity: 1 })}
+        <button onClick={() => addToCart({ ...product, quantity: 1 } as any)}
           className="w-full mt-2.5 py-2.5 bg-white/10 backdrop-blur-sm border border-white/25 text-white text-[11px] tracking-widest uppercase font-semibold rounded-full opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 cursor-pointer hover:bg-white hover:text-stone-900 hover:border-white active:scale-95">
           Add to Cart
         </button>
@@ -91,7 +90,7 @@ function WideCard({ product }: { product: Product }) {
             className="text-[11px] tracking-widest uppercase font-semibold bg-white text-stone-900 px-6 py-2.5 rounded-full hover:bg-stone-900 hover:text-white border border-white transition-all duration-200">
             Shop Now
           </Link>
-          <button onClick={() => addToCart({ ...product, quantity: 1 })}
+          <button onClick={() => addToCart({ ...product, quantity: 1 } as any)}
             className="text-[11px] tracking-widest uppercase font-semibold bg-transparent text-white px-6 py-2.5 rounded-full border border-white/50 hover:bg-white hover:text-stone-900 transition-all duration-200 opacity-0 group-hover:opacity-100 cursor-pointer">
             Quick Add
           </button>
@@ -101,38 +100,52 @@ function WideCard({ product }: { product: Product }) {
   );
 }
 
-// Items visible initially — 3 editorial + 8 regular = ~4 rows
 const INITIAL_COUNT = 11;
 const LOAD_MORE_COUNT = 16;
 
 export default function ProductList() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const normalized = products.map((p) => ({
-    ...p,
-    originalPrice: p.originalPrice ?? undefined,
-    badge: p.badge ?? undefined,
-  }));
+  useEffect(() => {
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data) => setProducts(Array.isArray(data) ? data : []))
+      .catch(() => setProducts([]))
+      .finally(() => setLoading(false));
+  }, []);
 
-  const visible = normalized.slice(0, visibleCount);
-  const hasMore = visibleCount < normalized.length;
+  const visible = products.slice(0, visibleCount);
+  const hasMore = visibleCount < products.length;
 
-  // First 3 → editorial
   const editorial = visible.slice(0, 3);
-  // Next 8 → regular
   const regular1 = visible.slice(3, 11);
-  // Banner divider shown after regular1 if we have more visible
-  // Next 2 → wide cards (if loaded)
   const wide1 = visible.slice(11, 13);
-  // Remaining → regular
   const rest = visible.slice(13);
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto py-20 text-center text-stone-400">
+        Loading products...
+      </div>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <div className="max-w-7xl mx-auto py-20 text-center text-stone-400">
+        No products found.
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto">
       {/* Sort bar */}
       <div className="flex items-center justify-between mb-8 pb-4 border-b border-stone-100 px-1">
         <p className="text-[11px] text-stone-400 tracking-[0.18em] uppercase font-medium">
-          {normalized.length} Products
+          {products.length} Products
         </p>
         <div className="flex items-center gap-2.5">
           <span className="text-[11px] text-stone-400 tracking-[0.18em] uppercase font-medium hidden sm:block">Sort by</span>
@@ -145,25 +158,25 @@ export default function ProductList() {
         </div>
       </div>
 
-      {/* ── Row 1: 3 editorial ── */}
+      {/* Row 1: editorial */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10">
         {editorial.map((p) => <EditorialCard key={p.id} product={p} />)}
       </div>
 
-      {/* ── Rows 2–3: 8 regular ── */}
+      {/* Rows 2-3: regular */}
       {regular1.length > 0 && (
         <div className="grid gap-x-5 gap-y-10 grid-cols-2 lg:grid-cols-4 mb-12">
           {regular1.map((p, i) => (
             <div key={p.id}
               className="animate-in fade-in slide-in-from-bottom-3 duration-500"
               style={{ animationDelay: `${i * 35}ms`, animationFillMode: "both" }}>
-              <ProductCard product={p} />
+              <ProductCard product={p as any} />
             </div>
           ))}
         </div>
       )}
 
-      {/* ── Full Width Banner (shows after first load more) ── */}
+      {/* Banner */}
       {visibleCount > INITIAL_COUNT && (
         <div className="relative w-full overflow-hidden rounded-2xl mb-12" style={{ aspectRatio: "21/7" }}>
           <img
@@ -186,21 +199,21 @@ export default function ProductList() {
         </div>
       )}
 
-      {/* ── 2 wide cards ── */}
+      {/* Wide cards */}
       {wide1.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-12">
           {wide1.map((p) => <WideCard key={p.id} product={p} />)}
         </div>
       )}
 
-      {/* ── Remaining regular ── */}
+      {/* Remaining */}
       {rest.length > 0 && (
         <div className="grid gap-x-5 gap-y-10 grid-cols-2 lg:grid-cols-4 mb-12">
           {rest.map((p, i) => (
             <div key={p.id}
               className="animate-in fade-in slide-in-from-bottom-3 duration-500"
               style={{ animationDelay: `${i * 35}ms`, animationFillMode: "both" }}>
-              <ProductCard product={p} />
+              <ProductCard product={p as any} />
             </div>
           ))}
         </div>
