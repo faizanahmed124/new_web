@@ -171,23 +171,23 @@ export default function Header() {
           {isMobileOpen && (
             <nav className="md:hidden mt-3 animate-in slide-in-from-top duration-200">
               <div className="flex flex-col pb-4 border-b border-stone-200 space-y-1">
-                <div className="text-[10px] uppercase tracking-widest text-stone-400 font-semibold px-3 pt-2 pb-1">Men</div>
-                {menCategories.map(({ href, label }) => (
-                  <Link key={href} href={href} onClick={closeMobileMenu}
-                    className="text-sm py-1.5 px-3 rounded-md text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-all">{label}</Link>
-                ))}
-                <div className="text-[10px] uppercase tracking-widest text-stone-400 font-semibold px-3 pt-3 pb-1">Women</div>
-                {womenCategories.map(({ href, label }) => (
-                  <Link key={href} href={href} onClick={closeMobileMenu}
-                    className="text-sm py-1.5 px-3 rounded-md text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-all">{label}</Link>
-                ))}
-                <div className="text-[10px] uppercase tracking-widest text-stone-400 font-semibold px-3 pt-3 pb-1">Offers</div>
+                <Link href="/men" onClick={closeMobileMenu}
+                  className="text-sm font-semibold py-3 px-3 rounded-md text-stone-800 hover:text-stone-900 hover:bg-stone-100 transition-all border-b border-stone-100">
+                  Men
+                </Link>
+                <Link href="/women" onClick={closeMobileMenu}
+                  className="text-sm font-semibold py-3 px-3 rounded-md text-stone-800 hover:text-stone-900 hover:bg-stone-100 transition-all border-b border-stone-100">
+                  Women
+                </Link>
                 <Link href="/sale" onClick={closeMobileMenu}
-                  className="flex items-center gap-2 text-sm font-semibold py-1.5 px-3 rounded-md text-red-600 hover:bg-red-50 transition-all">
-                  <Tag className="h-4 w-4" /> Sale Items
+                  className="flex items-center gap-2 text-sm font-semibold py-3 px-3 rounded-md text-red-600 hover:bg-red-50 transition-all border-b border-stone-100">
+                  <Tag className="h-4 w-4" /> Sale
+                  <span className="text-[9px] font-bold bg-red-500 text-white px-1.5 py-0.5 rounded-full">HOT</span>
                 </Link>
                 <Link href="/contact" onClick={closeMobileMenu}
-                  className="text-sm py-1.5 px-3 rounded-md text-stone-700 hover:text-stone-900 hover:bg-stone-100 transition-all">Contact</Link>
+                  className="text-sm font-semibold py-3 px-3 rounded-md text-stone-800 hover:text-stone-900 hover:bg-stone-100 transition-all">
+                  Contact
+                </Link>
               </div>
               <div className="flex flex-col gap-2 pt-4">
                 <Button variant="outline" className="w-full text-sm border-stone-300" asChild>
