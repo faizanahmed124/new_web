@@ -51,25 +51,6 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="flex items-center justify-center divide-x divide-stone-200 mb-14">
-          {[
-            { num: "500+", label: "Styles" },
-            { num: "50k+", label: "Customers" },
-            { num: "4.9 ★", label: "Rating" },
-          ].map(({ num, label }) => (
-            <div key={label} className="px-8 text-center">
-              <p
-                className="text-2xl font-bold text-stone-900"
-                style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
-              >
-                {num}
-              </p>
-              <p className="text-[10px] tracking-widest uppercase text-stone-400 mt-0.5">
-                {label}
-              </p>
-            </div>
-          ))}
-        </div>
       </section>
 
       {/* ── Category Cards ── */}
