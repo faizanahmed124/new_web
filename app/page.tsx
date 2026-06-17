@@ -53,38 +53,7 @@ export default function Home() {
 
       </section>
 
-      {/* ── Category Cards ── */}
-      <section className="px-2 sm:px-3 lg:px-4 mb-16">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-[10px] tracking-[0.2em] uppercase text-stone-400 text-center mb-2 font-medium">
-            Shop by Category
-          </p>
-          <div className="grid grid-cols-3 gap-3 sm:gap-4">
-            {[
-              { href: "/men",    emoji: "👟", label: "Men",   sub: "180 styles",    bg: "#F5F3EE" },
-              { href: "/women",  emoji: "👠", label: "Women", sub: "220 styles",    bg: "#F7F3EC" },
-              { href: "/sale",   emoji: "🏷️", label: "Sale",  sub: "Up to 50% off", bg: "#FDF1F1", badge: "HOT" },
-            ].map(({ href, emoji, label, sub, bg, badge }) => (
-              <Link
-                key={href}
-                href={href}
-                className="border border-stone-200 hover:border-stone-400 rounded-2xl p-5 flex flex-col items-center gap-2 transition-all group"
-                style={{ backgroundColor: bg }}
-              >
-                <span className="text-4xl">{emoji}</span>
-                <span className="text-sm font-semibold text-stone-800 tracking-wide">{label}</span>
-                <span className="text-xs text-stone-400">{sub}</span>
-                {badge && (
-                  <span className="text-[10px] bg-amber-100 text-amber-800 font-semibold px-2 py-0.5 rounded-full tracking-wider">
-                    {badge}
-                  </span>
-                )}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
+     
 {/* // Category Cards section ke baad: */}
 <SplitBanner
   leftImage="/images/forty2.png"
